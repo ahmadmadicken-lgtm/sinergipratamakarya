@@ -3,7 +3,7 @@
 Struktur: index.html, css/styles.css, js/main.js, js/config.js, assets/ (pengiriman.mp4, poster.jpg), favicon.svg, robots.txt, sitemap.xml.
 
 ## Sebelum go-live
-1. Ganti `GANTI-DOMAIN.com` di index.html (canonical, og:url, og:image, JSON-LD), robots.txt, sitemap.xml.
+1. Ganti `sinergipratamakarya.online` di index.html (canonical, og:url, og:image, JSON-LD), robots.txt, sitemap.xml.
 2. Buat gambar og-image.png (1200x630) dan taruh di assets/.
 3. Isi `GTM_ID` di js/config.js setelah container GTM dibuat. Kosong = GTM mati.
 4. Di GTM: buat trigger Custom Event untuk whatsapp_click (dan hero_cta_click, product_cta_click, contact_cta_click, final_cta_click), lalu tag GA4 Event dengan parameter section_name, button_name, page_location, utm_*, gclid. Uji di GTM Preview dan GA4 DebugView.
