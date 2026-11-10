@@ -76,4 +76,5 @@
     }, { threshold: 0.4 });
     io.observe(video);
   }
+
 })();
