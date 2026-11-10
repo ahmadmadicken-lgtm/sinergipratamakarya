@@ -6,7 +6,7 @@
 <title>Solar Industri &amp; Biodiesel B50 | PT. Sinergi Pratama Karya</title>
 <meta name="description" content="Pengadaan solar industri dan biodiesel B50 untuk perusahaan. Minimum order 5 kL, pengiriman mobil tangki, konsultasi langsung via WhatsApp.">
 <link rel="canonical" href="https://sinergipratamakarya.online/">
-<meta name="theme-color" content="#0A1F3D">
+<meta name="theme-color" content="#071A33">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 
 <meta property="og:type" content="website">
@@ -18,9 +18,8 @@
 <meta property="og:image" content="https://sinergipratamakarya.online/assets/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="preload" href="assets/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/public-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/styles.css">
 
 <script type="application/ld+json">
@@ -35,7 +34,7 @@
 <div class="header-inner">
 <a class="brand" href="#beranda" aria-label="PT. Sinergi Pratama Karya, ke beranda">
 <span class="brand-mark" aria-hidden="true">S</span>
-<span class="brand-text"><span class="brand-name">SINERGI PRATAMA KARYA</span></span>
+<span class="brand-name">SINERGI PRATAMA KARYA</span>
 </a>
 <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Buka menu" aria-expanded="false" aria-controls="site-nav">
 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
@@ -59,8 +58,7 @@ Chat WhatsApp
 
 <section class="hero" id="beranda" aria-labelledby="judul-hero">
 <div class="container hero-grid">
-<div>
-<span class="chip chip-amber">MINIMUM ORDER 5 kL</span>
+<div class="hero-copy">
 <h1 id="judul-hero">Solar Industri B50 untuk Kebutuhan Operasional Perusahaan Anda</h1>
 <p class="lead">Minimum order 5 kL. Pengiriman dengan mobil tangki. Melayani permintaan dari seluruh Indonesia.</p>
 <div class="btn-row">
@@ -69,74 +67,84 @@ Chat WhatsApp
 </div>
 <p class="micro">Kirim pesan kapan saja, kami balas secepatnya.</p>
 </div>
-<div class="hero-visual">
-<div class="hero-panel">
-<svg viewBox="0 0 520 400" role="img" aria-label="Ilustrasi tangki penyimpanan dan mobil tangki bahan bakar">
-<rect x="0" y="300" width="520" height="100" fill="#13335F"/>
-<rect x="50" y="110" width="130" height="190" fill="#1B4F9C"/>
-<ellipse cx="115" cy="110" rx="65" ry="14" fill="#2A66C0"/>
-<rect x="205" y="70" width="150" height="230" fill="#1F5BB0"/>
-<ellipse cx="280" cy="70" rx="75" ry="15" fill="#3474CF"/>
-<rect x="380" y="150" width="110" height="150" fill="#1B4F9C"/>
-<ellipse cx="435" cy="150" rx="55" ry="13" fill="#2A66C0"/>
-<rect x="90" y="180" width="3" height="120" fill="#FFFFFF" opacity="0.12"/>
-<rect x="140" y="180" width="3" height="120" fill="#FFFFFF" opacity="0.12"/>
-<rect x="250" y="140" width="3" height="160" fill="#FFFFFF" opacity="0.12"/>
-<rect x="310" y="140" width="3" height="160" fill="#FFFFFF" opacity="0.12"/>
-<rect x="180" y="258" width="200" height="10" fill="#3474CF"/>
-<rect x="60" y="322" width="220" height="46" rx="23" fill="#E8F1FC"/>
-<rect x="286" y="330" width="64" height="38" rx="6" fill="#0B63CE"/>
-<rect x="322" y="337" width="22" height="14" rx="2" fill="#0A1F3D"/>
-<rect x="76" y="342" width="120" height="6" rx="3" fill="#0B63CE"/>
-<circle cx="110" cy="372" r="12" fill="#06142B" stroke="#E8F1FC" stroke-width="3"/>
-<circle cx="170" cy="372" r="12" fill="#06142B" stroke="#E8F1FC" stroke-width="3"/>
-<circle cx="322" cy="372" r="12" fill="#06142B" stroke="#E8F1FC" stroke-width="3"/>
-</svg>
+
+<div class="gauge-panel" aria-labelledby="judul-gauge">
+<h2 class="gauge-title" id="judul-gauge">Perkirakan kebutuhan Anda</h2>
+<div class="gauge-body">
+<div class="gauge-wrap" aria-hidden="true">
+<div class="tank" id="tank"><div class="liquid"></div></div>
+<div class="scale">
+<span class="tick" style="--p:100%">40</span>
+<span class="tick" style="--p:75%">30</span>
+<span class="tick" style="--p:50%">20</span>
+<span class="tick" style="--p:25%">10</span>
+<span class="tick tick-min" style="--p:12.5%">5 kL</span>
+</div>
+<span class="min-line"></span>
+</div>
+<div class="gauge-ctrl">
+<output class="readout" id="readout" for="vol" aria-live="polite">5 kL</output>
+<p class="readout-l" id="readout-l">5.000 liter</p>
+<label class="vol-label" for="vol">Geser untuk memilih volume</label>
+<input class="vol" id="vol" type="range" min="5" max="40" step="5" value="5">
+<p class="gauge-note">Minimum order 5 kL. Volume yang Anda pilih ikut tertulis di pesan WhatsApp.</p>
 </div>
 </div>
 </div>
+</div>
+<div class="ruler" aria-hidden="true"></div>
 </section>
 
-<section class="trust" aria-label="Ringkasan layanan">
-<ul class="container trust-list">
-<li>Min. order 5 kL</li>
-<li>Mobil tangki</li>
-<li>Seluruh Indonesia</li>
-<li>Konsultasi via WhatsApp</li>
-</ul>
+<section class="plate" aria-label="Ringkasan layanan">
+<dl class="container plate-grid">
+<div><dt>Minimum order</dt><dd>5 kL</dd></div>
+<div><dt>Pengiriman</dt><dd>Mobil tangki</dd></div>
+<div><dt>Jangkauan</dt><dd>Seluruh Indonesia</dd></div>
+<div><dt>Konsultasi</dt><dd>via WhatsApp</dd></div>
+</dl>
 </section>
 
 <section class="section" id="pengiriman" aria-labelledby="judul-pengiriman">
 <div class="container video-grid">
+<div class="video-frame">
 <div class="video-wrap">
 <video id="video-pengiriman" data-autoplay controls muted loop playsinline preload="none" poster="assets/poster.jpg" aria-label="Dokumentasi pengiriman solar menggunakan mobil tangki">
 <source src="assets/pengiriman.mp4" type="video/mp4">
 </video>
 </div>
-<div>
+</div>
+<div class="video-copy">
 <h2 id="judul-pengiriman">Dokumentasi Pengiriman</h2>
-<p class="lead-dark">Proses unloading solar dari mobil tangki ke tangki penyimpanan client. Ketuk ikon speaker pada video untuk mendengar suara.</p>
+<p class="intro">Proses unloading solar dari mobil tangki ke tangki penyimpanan client. Ketuk ikon speaker pada video untuk mendengar suara.</p>
 <a class="btn btn-wa btn-lg" href="https://wa.me/6281219965256?text=Halo%20Ade%2C%20saya%20tertarik%20dengan%20solar%20industri%20dan%20biodiesel%20dari%20PT.%20Sinergi%20Pratama%20Karya.%20Mohon%20informasinya.%0A%0APerusahaan%3A%0ALokasi%20pengiriman%3A%0APerkiraan%20kebutuhan%20%28kL%29%3A" target="_blank" rel="noopener" data-wa data-section="pengiriman" data-button="hubungi_via_whatsapp">Hubungi Kami via WhatsApp</a>
 </div>
 </div>
 </section>
 
-<section class="section bg-soft" id="produk" aria-labelledby="judul-produk">
+<section class="section bg-paper" id="produk" aria-labelledby="judul-produk">
 <div class="container">
+<div class="sec-head">
 <h2 id="judul-produk">Produk untuk Kebutuhan Operasional Anda</h2>
 <p class="intro">Ceritakan kebutuhan Anda. Spesifikasi dan detail produk kami jelaskan langsung lewat WhatsApp. Minimum order 5 kL.</p>
-<div class="card-grid card-grid-2">
-<article class="card card-lg">
-<span class="chip chip-sky">MIN. ORDER 5 kL</span>
+</div>
+<ul class="products">
+<li class="product">
+<div class="vial" style="--fluid:#C98310" aria-hidden="true"><span class="vial-liquid"></span></div>
+<div class="product-body">
 <h3>Solar Industri</h3>
 <p>Solar untuk alat berat, genset, armada, dan mesin pabrik, sesuai ketentuan campuran biodiesel yang berlaku.</p>
-</article>
-<article class="card card-lg">
-<span class="chip chip-sky">MIN. ORDER 5 kL</span>
+</div>
+<span class="product-moq">Min. order 5 kL</span>
+</li>
+<li class="product">
+<div class="vial" style="--fluid:#E4C04F" aria-hidden="true"><span class="vial-liquid"></span></div>
+<div class="product-body">
 <h3>Biodiesel B100</h3>
 <p>Biodiesel murni (FAME) dari minyak nabati atau lemak hewani, umumnya dipakai sebagai komponen campuran. Penggunaan untuk aplikasi Anda kita diskusikan sesuai kebutuhan.</p>
-</article>
 </div>
+<span class="product-moq">Min. order 5 kL</span>
+</li>
+</ul>
 <div class="cta-stack">
 <a class="btn btn-wa btn-xl" href="https://wa.me/6281219965256?text=Halo%20Ade%2C%20saya%20tertarik%20dengan%20solar%20industri%20dan%20biodiesel%20dari%20PT.%20Sinergi%20Pratama%20Karya.%20Mohon%20informasinya.%0A%0APerusahaan%3A%0ALokasi%20pengiriman%3A%0APerkiraan%20kebutuhan%20%28kL%29%3A" target="_blank" rel="noopener" data-wa data-section="produk" data-button="hubungi_kebutuhan_apa_pun">Hubungi Kami untuk Kebutuhan Apa Pun</a>
 <span class="micro">Spesifikasi dan detail produk dijelaskan via WhatsApp.</span>
@@ -146,51 +154,64 @@ Chat WhatsApp
 
 <section class="section" id="industri" aria-labelledby="judul-industri">
 <div class="container">
+<div class="sec-head">
 <h2 id="judul-industri">Solusi Bahan Bakar untuk Berbagai Industri</h2>
 <p class="intro">Setiap sektor punya kebutuhan operasional berbeda. Ceritakan kebutuhan Anda, kami bantu diskusikan pengadaannya.</p>
-<div class="card-grid card-grid-4">
-<article class="card card-soft"><h3>Pertambangan</h3><p>Solar untuk alat berat dan operasional lapangan yang berjalan terus. Diskusikan volume dan jadwal pengadaan.</p></article>
-<article class="card card-soft"><h3>Perkebunan</h3><p>Bahan bakar untuk kendaraan, alat berat, dan mesin pendukung kebun.</p></article>
-<article class="card card-soft"><h3>Pabrik &amp; manufaktur</h3><p>Solar untuk mesin produksi dan genset pabrik.</p></article>
-<article class="card card-soft"><h3>Logistik &amp; transportasi</h3><p>Pengadaan bahan bakar untuk armada dengan kebutuhan berkala.</p></article>
-<article class="card card-soft"><h3>Konstruksi &amp; kontraktor</h3><p>Pasokan untuk alat berat dan mesin proyek sesuai lokasi.</p></article>
-<article class="card card-soft"><h3>Gedung komersial &amp; genset</h3><p>Solar untuk genset hotel, rumah sakit, pusat belanja, dan gedung perkantoran.</p></article>
-<article class="card card-soft"><h3>Distributor &amp; trader</h3><p>Diskusikan peluang kerja sama dan pengadaan dalam jumlah besar.</p></article>
-<div class="card card-dark">
-<p class="card-dark-title">Kebutuhan Anda tidak ada di daftar?</p>
-<a class="btn btn-wa" href="https://wa.me/6281219965256?text=Halo%20Ade%2C%20saya%20tertarik%20dengan%20solar%20industri%20dan%20biodiesel%20dari%20PT.%20Sinergi%20Pratama%20Karya.%20Mohon%20informasinya.%0A%0APerusahaan%3A%0ALokasi%20pengiriman%3A%0APerkiraan%20kebutuhan%20%28kL%29%3A" target="_blank" rel="noopener" data-wa data-section="industri" data-button="diskusikan_kebutuhan_pengadaan">Diskusikan Kebutuhan Pengadaan</a>
+</div>
+<div class="sectors">
+<div class="sector-tabs" role="tablist" aria-label="Sektor industri">
+<button class="sector-tab" role="tab" id="tab-tambang" aria-controls="panel-tambang" aria-selected="true" type="button" data-sector="pertambangan">Pertambangan</button>
+<button class="sector-tab" role="tab" id="tab-kebun" aria-controls="panel-kebun" aria-selected="false" tabindex="-1" type="button" data-sector="perkebunan">Perkebunan</button>
+<button class="sector-tab" role="tab" id="tab-pabrik" aria-controls="panel-pabrik" aria-selected="false" tabindex="-1" type="button" data-sector="pabrik_manufaktur">Pabrik &amp; manufaktur</button>
+<button class="sector-tab" role="tab" id="tab-logistik" aria-controls="panel-logistik" aria-selected="false" tabindex="-1" type="button" data-sector="logistik_transportasi">Logistik &amp; transportasi</button>
+<button class="sector-tab" role="tab" id="tab-konstruksi" aria-controls="panel-konstruksi" aria-selected="false" tabindex="-1" type="button" data-sector="konstruksi_kontraktor">Konstruksi &amp; kontraktor</button>
+<button class="sector-tab" role="tab" id="tab-gedung" aria-controls="panel-gedung" aria-selected="false" tabindex="-1" type="button" data-sector="gedung_genset">Gedung komersial &amp; genset</button>
+<button class="sector-tab" role="tab" id="tab-distributor" aria-controls="panel-distributor" aria-selected="false" tabindex="-1" type="button" data-sector="distributor_trader">Distributor &amp; trader</button>
+</div>
+<div class="sector-stage">
+<div class="sector-panel" role="tabpanel" id="panel-tambang" aria-labelledby="tab-tambang"><h3>Pertambangan</h3><p>Solar untuk alat berat dan operasional lapangan yang berjalan terus. Diskusikan volume dan jadwal pengadaan.</p></div>
+<div class="sector-panel" role="tabpanel" id="panel-kebun" aria-labelledby="tab-kebun" hidden><h3>Perkebunan</h3><p>Bahan bakar untuk kendaraan, alat berat, dan mesin pendukung kebun.</p></div>
+<div class="sector-panel" role="tabpanel" id="panel-pabrik" aria-labelledby="tab-pabrik" hidden><h3>Pabrik &amp; manufaktur</h3><p>Solar untuk mesin produksi dan genset pabrik.</p></div>
+<div class="sector-panel" role="tabpanel" id="panel-logistik" aria-labelledby="tab-logistik" hidden><h3>Logistik &amp; transportasi</h3><p>Pengadaan bahan bakar untuk armada dengan kebutuhan berkala.</p></div>
+<div class="sector-panel" role="tabpanel" id="panel-konstruksi" aria-labelledby="tab-konstruksi" hidden><h3>Konstruksi &amp; kontraktor</h3><p>Pasokan untuk alat berat dan mesin proyek sesuai lokasi.</p></div>
+<div class="sector-panel" role="tabpanel" id="panel-gedung" aria-labelledby="tab-gedung" hidden><h3>Gedung komersial &amp; genset</h3><p>Solar untuk genset hotel, rumah sakit, pusat belanja, dan gedung perkantoran.</p></div>
+<div class="sector-panel" role="tabpanel" id="panel-distributor" aria-labelledby="tab-distributor" hidden><h3>Distributor &amp; trader</h3><p>Diskusikan peluang kerja sama dan pengadaan dalam jumlah besar.</p></div>
+<div class="sector-cta">
+<p>Kebutuhan Anda tidak ada di daftar?</p>
+<a class="btn btn-wa" href="https://wa.me/6281219965256?text=Halo%20Ade%2C%20saya%20tertarik%20dengan%20solar%20industri%20dan%20biodiesel%20dari%20PT.%20Sinergi%20Pratama%20Karya.%20Mohon%20informasinya.%0A%0APerusahaan%3A%0ALokasi%20pengiriman%3A%0APerkiraan%20kebutuhan%20%28kL%29%3A" target="_blank" rel="noopener" data-wa data-section="industri" data-button="diskusikan_kebutuhan_pengadaan" id="sector-btn">Diskusikan Kebutuhan Pengadaan</a>
+</div>
 </div>
 </div>
 </div>
 </section>
 
-<section class="section bg-navy" id="mengapa-kami" aria-labelledby="judul-mengapa">
+<section class="section bg-ink" id="mengapa-kami" aria-labelledby="judul-mengapa">
 <div class="container">
 <h2 id="judul-mengapa" class="on-dark">Pengadaan yang Jelas dan Mudah Dimulai</h2>
-<ol class="why-grid">
-<li><span class="why-no" aria-hidden="true">01</span><div><h3>Mengikuti perkembangan terbaru</h3><p>Kami menawarkan solar B50 sesuai kebijakan yang berlaku.</p></div></li>
-<li><span class="why-no" aria-hidden="true">02</span><div><h3>Syarat transparan</h3><p>Minimum order 5 kL dinyatakan sejak awal, tanpa kejutan.</p></div></li>
-<li><span class="why-no" aria-hidden="true">03</span><div><h3>Pengiriman mobil tangki</h3><p>Pengiriman langsung ke lokasi Anda, jadwal dikonfirmasi sesuai lokasi.</p></div></li>
-<li><span class="why-no" aria-hidden="true">04</span><div><h3>Melayani permintaan dari seluruh Indonesia</h3><p>Ketersediaan di wilayah Anda kami konfirmasi saat konsultasi.</p></div></li>
-<li><span class="why-no" aria-hidden="true">05</span><div><h3>Satu kontak langsung</h3><p>Berbicara langsung dengan Ade via WhatsApp, tanpa antrean formulir.</p></div></li>
-<li><span class="why-no" aria-hidden="true">06</span><div><h3>Kirim kapan saja</h3><p>Pesan di luar jam kantor tetap kami terima dan balas secepatnya.</p></div></li>
-</ol>
+<dl class="why-list">
+<div class="why-row"><dt>Mengikuti perkembangan terbaru</dt><dd>Kami menawarkan solar B50 sesuai kebijakan yang berlaku.</dd></div>
+<div class="why-row"><dt>Syarat transparan</dt><dd>Minimum order 5 kL dinyatakan sejak awal, tanpa kejutan.</dd></div>
+<div class="why-row"><dt>Pengiriman mobil tangki</dt><dd>Pengiriman langsung ke lokasi Anda, jadwal dikonfirmasi sesuai lokasi.</dd></div>
+<div class="why-row"><dt>Melayani permintaan dari seluruh Indonesia</dt><dd>Ketersediaan di wilayah Anda kami konfirmasi saat konsultasi.</dd></div>
+<div class="why-row"><dt>Satu kontak langsung</dt><dd>Berbicara langsung dengan Ade via WhatsApp, tanpa antrean formulir.</dd></div>
+<div class="why-row"><dt>Kirim kapan saja</dt><dd>Pesan di luar jam kantor tetap kami terima dan balas secepatnya.</dd></div>
+</dl>
 </div>
 </section>
 
 <section class="section" id="cara-memulai" aria-labelledby="judul-langkah">
 <div class="container">
 <h2 id="judul-langkah">Tiga Langkah Memulai</h2>
-<ol class="steps">
-<li class="card"><span class="step-no" aria-hidden="true">1</span><h3>Kirim kebutuhan Anda</h3><p>Sebutkan perusahaan, lokasi pengiriman, dan perkiraan kebutuhan (kL) lewat WhatsApp.</p></li>
-<li class="card"><span class="step-no" aria-hidden="true">2</span><h3>Diskusi</h3><p>Kita bahas produk, volume, dan lokasi pengiriman.</p></li>
-<li class="card"><span class="step-no" aria-hidden="true">3</span><h3>Terima penawaran</h3><p>Penawaran disusun sesuai kebutuhan dan kondisi pasar.</p></li>
+<ol class="timeline" id="timeline">
+<li class="step"><span class="step-no" aria-hidden="true">1</span><h3>Kirim kebutuhan Anda</h3><p>Sebutkan perusahaan, lokasi pengiriman, dan perkiraan kebutuhan (kL) lewat WhatsApp.</p></li>
+<li class="step"><span class="step-no" aria-hidden="true">2</span><h3>Diskusi</h3><p>Kita bahas produk, volume, dan lokasi pengiriman.</p></li>
+<li class="step"><span class="step-no" aria-hidden="true">3</span><h3>Terima penawaran</h3><p>Penawaran disusun sesuai kebutuhan dan kondisi pasar.</p></li>
 </ol>
 <a class="btn btn-wa btn-lg" href="https://wa.me/6281219965256?text=Halo%20Ade%2C%20saya%20tertarik%20dengan%20solar%20industri%20dan%20biodiesel%20dari%20PT.%20Sinergi%20Pratama%20Karya.%20Mohon%20informasinya.%0A%0APerusahaan%3A%0ALokasi%20pengiriman%3A%0APerkiraan%20kebutuhan%20%28kL%29%3A" target="_blank" rel="noopener" data-wa data-section="cara_memulai" data-button="mulai_via_whatsapp">Mulai via WhatsApp</a>
 </div>
 </section>
 
-<section class="section bg-soft" id="informasi" aria-labelledby="judul-informasi">
+<section class="section bg-paper" id="informasi" aria-labelledby="judul-informasi">
 <div class="container narrow">
 <h2 id="judul-informasi">Panduan B50 untuk Pengguna Industri</h2>
 <p class="intro">Informasi umum agar Anda lebih siap memakai bahan bakar B50.</p>
@@ -221,10 +242,10 @@ Chat WhatsApp
 <div class="container about-grid">
 <div>
 <h2 id="judul-tentang">Tentang PT. Sinergi Pratama Karya</h2>
-<p class="lead-dark">PT. Sinergi Pratama Karya adalah mitra pengadaan solar industri dan biodiesel untuk kebutuhan perusahaan. Kami membantu Anda menemukan pasokan yang sesuai dengan kebutuhan operasional, dengan komunikasi yang langsung dan jelas.</p>
+<p class="intro">PT. Sinergi Pratama Karya adalah mitra pengadaan solar industri dan biodiesel untuk kebutuhan perusahaan. Kami membantu Anda menemukan pasokan yang sesuai dengan kebutuhan operasional, dengan komunikasi yang langsung dan jelas.</p>
 </div>
 <div>
-<h3 class="label-caps">NILAI KAMI</h3>
+<h3 class="values-title">Nilai kami</h3>
 <ul class="values">
 <li><strong>Saling menghormati</strong> — kesuksesan dicapai bersama.</li>
 <li><strong>Kejujuran</strong> — komunikasi yang terbuka dan dapat dipercaya.</li>
@@ -236,7 +257,7 @@ Chat WhatsApp
 </div>
 </section>
 
-<section class="section bg-soft" id="faq" aria-labelledby="judul-faq">
+<section class="section bg-paper" id="faq" aria-labelledby="judul-faq">
 <div class="container narrow">
 <h2 id="judul-faq">Pertanyaan yang Sering Diajukan</h2>
 <div class="accordion">
@@ -252,7 +273,8 @@ Chat WhatsApp
 </div>
 </section>
 
-<section class="section bg-navy cta-final" id="kontak" aria-labelledby="judul-kontak">
+<section class="section bg-ink cta-final" id="kontak" aria-labelledby="judul-kontak">
+<div class="ruler ruler-top" aria-hidden="true"></div>
 <div class="container narrow center">
 <h2 id="judul-kontak" class="on-dark">Siap Membahas Kebutuhan Solar atau B50 Perusahaan Anda?</h2>
 <p class="lead on-dark-text">Sampaikan perusahaan, lokasi pengiriman, dan perkiraan kebutuhan (minimal 5 kL). Kirim kapan saja, kami balas secepatnya.</p>

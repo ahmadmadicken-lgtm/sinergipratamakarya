@@ -2,10 +2,12 @@
 (function () {
   'use strict';
   var dl = (window.dataLayer = window.dataLayer || []);
+  var $ = function (s, c) { return (c || document).querySelector(s); };
+  var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
 
   /* ---- Menu mobile ---- */
-  var toggle = document.getElementById('menu-toggle');
-  var nav = document.getElementById('site-nav');
+  var toggle = $('#menu-toggle');
+  var nav = $('#site-nav');
   if (toggle && nav) {
     toggle.addEventListener('click', function () {
       var open = nav.classList.toggle('open');
@@ -35,6 +37,84 @@
     });
   } catch (e) { /* sessionStorage tidak tersedia */ }
 
+  /* ---- Pesan WhatsApp (satu pesan untuk semua tombol) ---- */
+  var WA_NUMBER = '6281219965256';
+  var volume = null; // terisi hanya setelah pengunjung menggeser pengukur
+  function waUrl() {
+    var msg = 'Halo Ade, saya tertarik dengan solar industri dan biodiesel dari PT. Sinergi Pratama Karya. Mohon informasinya.\n\n' +
+      'Perusahaan:\nLokasi pengiriman:\nPerkiraan kebutuhan (kL):' + (volume ? ' ' + volume : '');
+    return 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg);
+  }
+  function refreshWaLinks() {
+    var url = waUrl();
+    $$('a[data-wa]').forEach(function (a) { a.setAttribute('href', url); });
+  }
+
+  /* ---- Pengukur tangki ---- */
+  var tank = $('#tank');
+  var vol = $('#vol');
+  var readout = $('#readout');
+  var readoutL = $('#readout-l');
+  function fmt(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.'); }
+  function setLevel(v) {
+    var pct = v / 40 * 100;
+    if (tank) tank.style.setProperty('--lvl', pct + '%');
+    if (vol) vol.style.setProperty('--fill', ((v - 5) / 35 * 100) + '%');
+    if (readout) readout.textContent = v + ' kL';
+    if (readoutL) readoutL.textContent = fmt(v * 1000) + ' liter';
+  }
+  if (vol && tank) {
+    setLevel(5);
+    tank.style.setProperty('--lvl', '0%');
+    // Tangki terisi sampai garis minimum order saat halaman dibuka
+    window.requestAnimationFrame(function () {
+      window.setTimeout(function () { tank.style.setProperty('--lvl', '12.5%'); }, 250);
+    });
+    vol.addEventListener('input', function () {
+      var v = parseInt(vol.value, 10);
+      setLevel(v);
+      volume = v;
+      refreshWaLinks();
+    });
+  }
+
+  /* ---- Tab sektor industri ---- */
+  var tabs = $$('.sector-tab');
+  var sectorBtn = $('#sector-btn');
+  function selectTab(tab, focus) {
+    tabs.forEach(function (t) {
+      var on = t === tab;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+      var panel = document.getElementById(t.getAttribute('aria-controls'));
+      if (panel) panel.hidden = !on;
+    });
+    if (sectorBtn) sectorBtn.setAttribute('data-sector', tab.getAttribute('data-sector') || '');
+    if (focus) tab.focus();
+  }
+  tabs.forEach(function (tab, i) {
+    tab.addEventListener('click', function () { selectTab(tab, false); });
+    tab.addEventListener('keydown', function (e) {
+      var n = tabs.length, j = null;
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') j = (i + 1) % n;
+      else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') j = (i - 1 + n) % n;
+      else if (e.key === 'Home') j = 0;
+      else if (e.key === 'End') j = n - 1;
+      if (j !== null) { e.preventDefault(); selectTab(tabs[j], true); }
+    });
+  });
+
+  /* ---- Garis langkah memulai ---- */
+  var tl = $('#timeline');
+  if (tl) {
+    if ('IntersectionObserver' in window) {
+      var tio = new IntersectionObserver(function (en) {
+        if (en[0].isIntersecting) { tl.classList.add('is-in'); tio.disconnect(); }
+      }, { threshold: 0.4 });
+      tio.observe(tl);
+    } else { tl.classList.add('is-in'); }
+  }
+
   /* ---- Pelacakan klik WhatsApp ---- */
   var SECTION_EVENT = {
     hero: 'hero_cta_click',
@@ -51,17 +131,18 @@
       button_name: a.getAttribute('data-button') || 'whatsapp',
       page_location: window.location.href
     };
+    if (volume) base.volume_kl = volume;
+    var sector = a.getAttribute('data-sector');
+    if (sector) base.sector = sector;
     for (var k in attr) base[k] = attr[k];
-    // Event umum untuk semua tombol WhatsApp
     dl.push(Object.assign({ event: 'whatsapp_click' }, base));
-    // Event spesifik untuk bagian tertentu
     if (SECTION_EVENT[section]) {
       dl.push(Object.assign({ event: SECTION_EVENT[section] }, base));
     }
   });
 
   /* ---- Video: putar otomatis saat terlihat, jeda saat keluar ---- */
-  var video = document.getElementById('video-pengiriman');
+  var video = $('#video-pengiriman');
   if (video && 'IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
@@ -76,5 +157,4 @@
     }, { threshold: 0.4 });
     io.observe(video);
   }
-
 })();
